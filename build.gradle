@@ -29,9 +29,8 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     runtimeOnly 'com.h2database:h2'
-    implementation 'org.springframework.boot:spring-boot-starter-mustache'
     implementation 'org.springframework.session:spring-session-jdbc'
-    //testImplementation 'org.springframework.security:spring-security-test'
+    implementation 'org.springframework.boot:spring-boot-starter-mustache'
     testImplementation 'org.springframework.security:spring-security-test:6.2.3'
     runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 
