@@ -35,8 +35,10 @@ public class SecurityConfig extends  WebSecurityConfigurerAdapter {
             .antMatchers("/api/v1/**").hasRole(Role.USER.name())
             .anyRequest().authenticated()
             // 설정된 값들 이외 나머지 URL들을 나타낸다
-            // 여기서 authenticate()을 추가하여 나머지 URL들을 모두 인증된 사용자들에게만 허용하게 한다.
+            // 여기서 authenticate()을 추가하여 나머지 URL들을 모두 인증된 사용자들에게만 허용하게    한다.
             // 인증된 사용자 ==>> 로그인한 사용자
+            .and().oauth2Login().defaultSuccessUrl("/", true)
+            // 로그인을 성공하면 자바스크립트로 리다이렉트되는 오류가 있었는데 코드를 추가하여 본 화면으로 나오게 만들었다.
             .and()
             .logout()
             .logoutSuccessUrl("/")
