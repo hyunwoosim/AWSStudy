@@ -45,3 +45,10 @@ Error: GPG check FAILED
  - 패키지 메타데이터를 새로 고침하고 
  - 다시 설치하면 설치가 된다.
 
+7.26
+ - 배포 테스트중 ./gradlew test를 실행하는데 10분이 넘어도 compile.java에서 넘어가지 않았다.
+ - 검색과 issues에서 찾아본 결과 ec2 프리티어의 경우 주어진 메모리양이 적어 빌드 자주 에러가 난다는 것이다.
+ - 해결 방법은 바로 swap이었다.
+ - https://repost.aws/ko/knowledge-center/ec2-memory-swap-file
+ - 친절하게 설명해주고있었다. 
+ - 실행 결과 성공적으로 테스트가 완료되었다.
