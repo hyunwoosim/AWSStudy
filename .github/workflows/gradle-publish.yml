@@ -8,8 +8,8 @@
 env: # 12. 환경변수를 이름 : 값 으로 지정한다.
   S3_BUCKET_NAME: awsstudy-build # 내가 설정한 S3 버킷이름
   PROJECT_NAME: AWSstudy  # github 프로젝트 이름
-  CODE_DEPLOY_APPNAME: CodeDeploy # 애플리케이션 이름
-  CODE_DEPLOY_GROUP: CodeDeploy   # 배포그룹 이름
+  CODE_DEPLOY_APPNAME: awsstudy # 애플리케이션 이름
+  CODE_DEPLOY_GROUP: awsstudy-group   # 배포그룹 이름
 
 name: deploy # 1. GitHub Action에서 보여질 이름
 
