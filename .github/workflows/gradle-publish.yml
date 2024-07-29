@@ -68,8 +68,8 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ap-northeast-2
 
-    - name: Upload to S3
-      run: aws s3 cp --region ap-northeast-2 ./$PROJECT_NAME.zip s3://$S3_BUCKET_NAME/$PROJECT_NAME/$PROJECT_NAME.zip
+    - name: Upload to S3 # 변경사항 ./$PROJECT_NAME.zip -> ./deploy/$PROJECT_NAME.zip 으로 변경
+      run: aws s3 cp --region ap-northeast-2 ./deploy/$PROJECT_NAME.zip s3://$S3_BUCKET_NAME/$PROJECT_NAME/$PROJECT_NAME.zip
       # 15. s3에 프로젝트 이름에 해당하는 폴더에 zip파일을 저장
 
     - name: Code Deploy
