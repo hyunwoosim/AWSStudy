@@ -8,6 +8,8 @@
 env: # 12. 환경변수를 이름 : 값 으로 지정한다.
   S3_BUCKET_NAME: awsstudy-build # 내가 설정한 S3 버킷이름
   PROJECT_NAME: AWSstudy  # github 프로젝트 이름
+  CODE_DEPLOY_APPNAME: CodeDeploy # 애플리케이션 이름
+  CODE_DEPLOY_GROUP: CodeDeploy   # 배포그룹 이름
 
 name: deploy # 1. GitHub Action에서 보여질 이름
 
@@ -69,4 +71,7 @@ jobs:
     - name: Upload to S3
       run: aws s3 cp --region ap-northeast-2 ./$PROJECT_NAME.zip s3://$S3_BUCKET_NAME/$PROJECT_NAME/$PROJECT_NAME.zip
       # 15. s3에 프로젝트 이름에 해당하는 폴더에 zip파일을 저장
+
+    - name: Code Deploy
+      run: aws deploy create-deployment --application-name $CODE_DEPLOY_APP_NAME --deployment-config-name CodeDeployDefault.AllAtOnce --deployment-group-name $CODE_DEPLOY_GROUP_NAME --s3-location bucket=$S3_BUCKET_NAME,bundleType=zip,key=$PROJECT_NAME/$PROJECT_NAME.zip
 
