@@ -63,10 +63,7 @@ show tables;]]></console>
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files>
-      <object connection-id="cb78db75-2a73-43fc-af0c-b93ac1e33e01" object-ref="consoles/AWSStudy" />
-      <object connection-id="cb78db75-2a73-43fc-af0c-b93ac1e33e01" object-ref="consoles/AWSStudy 1" />
-    </open-files>
+    <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="cb78db75-2a73-43fc-af0c-b93ac1e33e01" />

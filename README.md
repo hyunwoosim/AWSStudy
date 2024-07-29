@@ -45,10 +45,45 @@ Error: GPG check FAILED
  - 패키지 메타데이터를 새로 고침하고 
  - 다시 설치하면 설치가 된다.
 
-7.26
+## 7.26
  - 배포 테스트중 ./gradlew test를 실행하는데 10분이 넘어도 compile.java에서 넘어가지 않았다.
  - 검색과 issues에서 찾아본 결과 ec2 프리티어의 경우 주어진 메모리양이 적어 빌드 자주 에러가 난다는 것이다.
  - 해결 방법은 바로 swap이었다.
  - https://repost.aws/ko/knowledge-center/ec2-memory-swap-file
  - 친절하게 설명해주고있었다. 
  - 실행 결과 성공적으로 테스트가 완료되었다.
+
+## 7.29
+  - 외부security와 rds 설정하는 도중 이런 오류가 발생하였다
+```
+java.lang.RuntimeException: Driver org.mariadb.jdbc.Driver claims to not accept jdbcUrl, jdbc:h2:mem:testdb;MODE=MYSQL
+        at com.zaxxer.hikari.util.DriverDataSource.<init>(DriverDataSource.java:110) ~[HikariCP-3.4.5.jar!/:na]
+        at com.zaxxer.hikari.pool.PoolBase.initializeDataSource(PoolBase.java:325) ~[HikariCP-3.4.5.jar!/:na]
+        at com.zaxxer.hikari.pool.PoolBase.<init>(PoolBase.java:114) ~[HikariCP-3.4.5.jar!/:na]
+        at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:108) ~[HikariCP-3.4.5.jar!/:na]
+        at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:112) ~[HikariCP-3.4.5.jar!/:na]
+```
+- 마리아db와 h2를 함께 사용할 수 없다. 이런 내용이다.
+- 정답은 바로 properties 파일이었다.
+- application.properties는 로컬에서 사용하는 파일이고
+- application-real.properties는 배포할때 사용하는 파일이었다.
+- 그래서 application-real.properties 파일에
+```
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL57Dialect
+spring.jpa.properties.hibernate.dialect.storage_engine=innodb
+spring.datasource.hikari.jdbc-url=jdbc:h2:mem:testdb;DB_CLOSE_ON_EXIT=FALSE;MODE=MYSQL
+spring.datasource.hikari.username=sa
+```
+- 이걸 사용해서 h2도 같이 사용된것이다. 그래서 마리아db와 h2의 충돌이 생긴것이다.
+- 해결 방법은?
+```
+spring.profiles.include=oauth,real-db
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL5InnoDBDialect
+spring.session.store-type=jdbc
+```
+- 이렇게 책에 나온대로 사용하면 된다.
+
+### 헷갈린 이유
+- 이제 버젼 업데이트들하면서 저자의 블로그에서 수정사항과 함께 진행중인데 헷갈렸다.
+- 더 자세히 읽어봤어야 했는데 수정사항만 봐서 온전한 나의 실수다.
+
