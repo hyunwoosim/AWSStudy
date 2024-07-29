@@ -87,3 +87,7 @@ spring.session.store-type=jdbc
 - 이제 버젼 업데이트들하면서 저자의 블로그에서 수정사항과 함께 진행중인데 헷갈렸다.
 - 더 자세히 읽어봤어야 했는데 수정사항만 봐서 온전한 나의 실수다.
 
+## 7.29 현재 상황
+- Code Commit은 깃허브
+- Code Build는  GitHub Action
+
