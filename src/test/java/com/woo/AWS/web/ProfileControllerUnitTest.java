@@ -3,7 +3,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Test;
 import org.springframework.mock.env.MockEnvironment;
 
-public class ProfileControllerUnitTest {
+public class    ProfileControllerUnitTest {
 
     @Test
     public void real_profile이_조회된다() {
